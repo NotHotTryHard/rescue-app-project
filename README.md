@@ -16,9 +16,6 @@ This README provides a complete guide on installation, configuration, usage, and
   - [Launching the Program](#launching-the-program)
 - [Graphical User Interface](#graphical-user-interface)
 - [Graphs and Images](#graphs-and-images)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ---
 
