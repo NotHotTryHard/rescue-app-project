@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1112</width>
+    <height>506</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(220, 228, 235)</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_14">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_13">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QFrame" name="method_frame">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgba(255, 255, 255, 30);
+border: 1px solid rgba(0, 0, 0, 30);
+border-radius: 7px;
+color: black;</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <property name="leftMargin">
+              <number>8</number>
+             </property>
+             <property name="topMargin">
+              <number>1</number>
+             </property>
+             <property name="bottomMargin">
+              <number>16</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-weight: bold;
+font-size: 15pt;
+background-color: none;
+border: none;</string>
+               </property>
+               <property name="text">
+                <string>Выбор метода</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout">
+                 <item>
+                  <widget class="QRadioButton" name="rb_method_graph">
+                   <property name="text">
+                    <string>Метод графов</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="rb_method_line">
+                   <property name="text">
+                    <string>Метод прямых</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="graph_frame">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgba(255, 255, 255, 30);
+border: 1px solid rgba(0, 0, 0, 30);
+border-radius: 7px;
+color: black;</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="styleSheet">
+                <string notr="true">
+font-weight: bold;
+font-size: 15pt;
+background-color: none;
+border: none;</string>
+               </property>
+               <property name="text">
+                <string>Параметры метода графов</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_3">
+                 <item>
+                  <widget class="QLabel" name="label_2">
+                   <property name="styleSheet">
+                    <string notr="true">background-color: none;
+border: none;</string>
+                   </property>
+                   <property name="text">
+                    <string>Ширина клетки</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_3">
+                   <property name="styleSheet">
+                    <string notr="true">background-color: none;
+border: none;</string>
+                   </property>
+                   <property name="text">
+                    <string>Частота проверки</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_2">
+                 <item>
+                  <widget class="QLineEdit" name="le_mesh_width"/>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="le_check_freq"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pb_gen_graph">
+               <property name="text">
+                <string>Сгенерировать граф</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QFrame" name="stations_frame">
+          <property name="styleSheet">
+           <string notr="true">color: black;
+background-color: rgba(255, 255, 255, 30);
+border: 1px solid rgba(0, 0, 0, 30);
+border-radius: 7px;</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="styleSheet">
+              <string notr="true">color: black;
+font-weight: bold;
+font-size: 15pt;
+background-color: none;
+border: none;</string>
+             </property>
+             <property name="text">
+              <string>Спасательные станции</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QPushButton" name="pb_add_station">
+               <property name="text">
+                <string>Добавить станцию</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pb_delete_station">
+               <property name="text">
+                <string>Удалить станцию</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTableView" name="tv_stations">
+             <property name="styleSheet">
+              <string notr="true">QTableView {
+background-color: rgba(255, 255, 255, 30);
+border: 1px solid rgba(0, 0, 0, 30);
+border-radius: 7px;
+}
+
+QTableView::section {
+background-color: rgba(230, 230, 230);
+color: black;
+border: none;
+height: 50px;
+font-size:15pt;
+}
+
+QTableView::item {
+border-style: none;
+border-bottom: rgba(0, 0, 0, 40);
+}
+
+QTableView::item:selected {
+border: none;
+color: rgba(0, 0, 0);
+background-color: rgba(255, 255, 255, 50);
+}</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QFrame" name="exec_frame">
+        <property name="styleSheet">
+         <string notr="true">color: black;
+background-color: rgba(255, 255, 255, 30);
+border: 1px solid rgba(0, 0, 0, 30);
+border-radius: 7px;</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="styleSheet">
+            <string notr="true">color: black;
+font-weight: bold;
+font-size: 20pt;
+background-color: none;
+border: none;</string>
+           </property>
+           <property name="text">
+            <string>Запуск эксперимента</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QLabel" name="label_7">
+               <property name="styleSheet">
+                <string notr="true">background-color: none;
+border: none;</string>
+               </property>
+               <property name="text">
+                <string>Количество происшествий</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="styleSheet">
+                <string notr="true">background-color: none;
+border: none;</string>
+               </property>
+               <property name="text">
+                <string>Предельное время пребывания в воде (мин)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_10">
+               <property name="styleSheet">
+                <string notr="true">background-color: none;
+border: none;</string>
+               </property>
+               <property name="text">
+                <string>Медианное время пребывания в воде (мин)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLineEdit" name="le_cases_number">
+               <property name="placeholderText">
+                <string>(прим. 10000)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="le_max_lifespan">
+               <property name="placeholderText">
+                <string>(прим. 25)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="le_median_lifespan">
+               <property name="placeholderText">
+                <string>(прим. 10)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QLabel" name="label_8">
+             <property name="styleSheet">
+              <string notr="true">color: black;
+font-weight: bold;
+font-size: 15pt;
+background-color: none;
+border: none;</string>
+             </property>
+             <property name="text">
+              <string>Графики</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cb_plot_closest_paths">
+             <property name="text">
+              <string>Кратчайшие пути</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cb_plot_map_reachability">
+             <property name="text">
+              <string>Сложность достижимости</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cb_plot_map_difst_reachability">
+             <property name="text">
+              <string>Разделение зон ответственности</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QLabel" name="label_9">
+             <property name="styleSheet">
+              <string notr="true">color: black;
+font-weight: bold;
+font-size: 15pt;
+background-color: none;
+border: none;</string>
+             </property>
+             <property name="text">
+              <string>Метрики</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cb_metr_avg_time">
+             <property name="text">
+              <string>Среднее время спасения</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cb_metr_peak_time">
+             <property name="text">
+              <string>Максимальное время спасения</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cb_metr_avg_prob">
+             <property name="text">
+              <string>Условная вероятность спасения (наихудший сценарий) </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cb_metr_peak_prob">
+             <property name="text">
+              <string>Вероятность спасения</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pb_start_exp">
+           <property name="text">
+            <string>Запуск</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>2</width>
+      <height>2</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_5"/>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>2</width>
+      <height>2</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_6"/>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
