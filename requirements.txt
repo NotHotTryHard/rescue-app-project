@@ -1,7 +1,20 @@
-numpy
-pandas
-matplotlib
-networkx
-scipy
-geopy
-PyQt6
+# Core dependencies
+PyQt6>=6.4.0
+numpy>=1.23.0
+matplotlib>=3.5.0
+scipy>=1.8.0
+pandas>=1.4.0
+networkx>=2.8.0
+
+# Geospatial
+geopy>=2.2.0
+shapely>=1.8.0
+
+# Development
+pytest>=7.0.0
+pylint>=2.13.0
+black>=22.3.0
+
+# Optional dependencies
+jupyter>=1.0.0
+scikit-learn>=1.0.0

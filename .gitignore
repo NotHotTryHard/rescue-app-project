@@ -5,9 +5,14 @@
 *.xlsx
 **/output/
 
-# Игнорировать кэшированные графы
+# Игнорировать кэшированные графы и другие ненужные файлы
 **/graphs/
+**/trash/
+**/backup_files/
+**/.cursor/
+!requirements.txt
 
 # Игнорировать кэшированные файлы
 __pycache__/
 .pytest_cache/
+rescue_app.egg-info/

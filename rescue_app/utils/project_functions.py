@@ -1,3 +1,9 @@
+"""
+Core functions for the rescue application calculations.
+This module contains various utilities and algorithms for geospatial calculations,
+path finding, and visualization related to rescue operations.
+"""
+
 import matplotlib as mpl
 import numpy as np
 import numpy.matlib
@@ -128,6 +134,16 @@ shapeZonexPrec = np.array([697, 799, 911, 983, 1025, 1135, 1174, 1321, 1412, 187
 shapeZoneyPrec = np.array([370, 307, 304, 265, 178, 171, 146, 154, 188, 257, 318, 431, 455, 440, 540, 580, 862, 999, 1059, 1203, 1237, 1299, 1456, 1508, 1518, 1608, 1610, 1700, 1731, 1828, 1824, 1874, 1909, 1924, 1947, 1903, 1969, 1978, 2021, 2020, 2058, 2088,  2139, 2154, 2284, 2405, 2416, 2401, 2423, 2440, 2509, 2531, 2549, 2530, 2589, 2617, 2684, 2721, 2749, 2764, 2795, 2876, 2899, 2935, 2936, 2997, 3023, 3023, 2998, 2964, 2992, 2979, 3000, 2918, 2837, 2786, 2771, 2737, 2679, 2649, 2527, 2473, 2400, 2424, 2442, 2380, 2333, 2372, 2406, 1450, 370])
 
 def shapeToPath(shapex, shapey):
+    """
+    Convert shape coordinates to a matplotlib Path object.
+    
+    Parameters:
+        shapex (numpy.array): Array of x-coordinates
+        shapey (numpy.array): Array of y-coordinates
+    
+    Returns:
+        matplotlib.path.Path: Path object created from the coordinates
+    """
     arr = []
     for i in range(np.size(shapex)):
         arr.append((shapex[i], shapey[i]))
@@ -135,6 +151,17 @@ def shapeToPath(shapex, shapey):
 
 
 def MeshFromShapeEdge(shapex, shapey, n=100):
+    """
+    Create a mesh from shape edges with evenly distributed points.
+    
+    Parameters:
+        shapex (numpy.array): Array of x-coordinates
+        shapey (numpy.array): Array of y-coordinates
+        n (int, optional): Number of points to generate. Defaults to 100.
+    
+    Returns:
+        numpy.array: Array of mesh points
+    """
     per = 0
     for i in range(1, np.size(shapex, axis=0)):
         dist = np.sqrt((shapex[i - 1] - shapex[i])**2 + (shapey[i - 1] - shapey[i])**2)
@@ -174,18 +201,57 @@ pathKron = shapeToPath(shapeKronx, shapeKrony)
 
 
 def DegreesToDecimal(deg, min, sec):
+    """
+    Convert degrees, minutes, seconds to decimal degrees.
+    
+    Parameters:
+        deg (float): Degrees
+        min (float): Minutes
+        sec (float): Seconds
+    
+    Returns:
+        float: Decimal degrees
+    """
     return deg + min/60 + sec/3600
 
 def DecimalToDegrees(dec):
+    """
+    Convert decimal degrees to degrees, minutes, seconds.
+    
+    Parameters:
+        dec (float): Decimal degrees
+    
+    Returns:
+        tuple: (degrees, minutes, seconds)
+    """
     return int(dec // 1), int((dec % 1) // (1/60)), int((dec % (1/60)) // (1/3600))
 
 def DegreesToDecimalVec(degminsec):
+    """
+    Convert a tuple of (degrees, minutes, seconds) to decimal degrees.
+    
+    Parameters:
+        degminsec (tuple): Tuple containing (degrees, minutes, seconds)
+    
+    Returns:
+        float: Decimal degrees
+    """
     deg = degminsec[0]
     min = degminsec[1]
     sec = degminsec[2]
     return deg + min/60 + sec/3600
 
 def DecimalToPixel(latitude, longitude):
+    """
+    Convert decimal coordinates to pixel coordinates on the map.
+    
+    Parameters:
+        latitude (float): Latitude in decimal degrees
+        longitude (float): Longitude in decimal degrees
+    
+    Returns:
+        tuple: (x, y) pixel coordinates
+    """
     pinpoint1pix = [2270, 1820]
     pinpoint2pix = [3685, 1820]
     pinpoint3pix = [2270, 408]
@@ -195,6 +261,16 @@ def DecimalToPixel(latitude, longitude):
 
 
 def PixelToDecimal(longpix, latpix):
+    """
+    Convert pixel coordinates to decimal coordinates.
+    
+    Parameters:
+        longpix (int): X-coordinate in pixels
+        latpix (int): Y-coordinate in pixels
+    
+    Returns:
+        tuple: (latitude, longitude) in decimal degrees
+    """
     pinpoint1pix = [2270, 1820]
     pinpoint2pix = [3685, 1820]
     pinpoint3pix = [2270, 408]
@@ -203,6 +279,15 @@ def PixelToDecimal(longpix, latpix):
     return latitude, longitude
 
 def DecimalToPixelVec(latlong):
+    """
+    Convert a tuple of (latitude, longitude) to pixel coordinates.
+    
+    Parameters:
+        latlong (tuple): Tuple containing (latitude, longitude) in decimal degrees
+    
+    Returns:
+        tuple: (x, y) pixel coordinates
+    """
     latitude = latlong[0]
     longitude = latlong[1]
     pinpoint1pix = [2270, 1820]
@@ -214,6 +299,15 @@ def DecimalToPixelVec(latlong):
 
 
 def PixelToDecimalVec(longlatpix):
+    """
+    Convert (x, y) pixel coordinates to decimal coordinates.
+    
+    Parameters:
+        longlatpix (tuple): Tuple containing (x, y) pixel coordinates
+    
+    Returns:
+        tuple: (latitude, longitude) in decimal degrees
+    """
     latpix = longlatpix[0]
     longpix = longlatpix[1]
     pinpoint1pix = [2270, 1820]
@@ -508,6 +602,17 @@ tmp = np.random.multivariate_normal(mean1, cov1, n)
 
 
 def GenSpotPts(n, i, dict=spotDict):
+    """
+    Generate spot points based on predefined locations.
+    
+    Parameters:
+        n (int): Number of points to generate
+        i (int): Index of the spot location to use
+        dict (dict, optional): Dictionary containing spot information. Defaults to spotDict.
+    
+    Returns:
+        tuple: (x, y) arrays of generated points or None if invalid parameters
+    """
     if i+1 == 7 or n == 0:
         return None
 
@@ -532,31 +637,18 @@ def GenSpotPts(n, i, dict=spotDict):
     return x, y
 
 
-def GenWinterPts(n, dict=spotDict):
-    spotWeights = np.array([0, (50 + 500)/2, (500 + 700)/2, (30 + 200)/2, (100 + 1000)/2,
-     (100 + 1000)/2, (30 + 150)/2, (50 + 500)/2, (20 + 300)/2, (100 + 2000)/2,
-      (100 + 1000)/2, (50 + 500)/2, (50 + 600)/2, (10 + 100)/2, (20 + 200)/2,
-       (50 + 300)/2, (10 + 150)/2, (50 + 500)/2, (5 + 200)/2])
-    intervals = np.cumsum(spotWeights)
-    sample = np.random.rand(n) * np.sum(spotWeights)
-
-    count = []
-    for i in range(np.size(spotWeights) - 1):
-        count.append(np.size(sample[(sample > intervals[i]) * (sample < intervals[i + 1])]))
-    # print(count)
-
-    x = np.array([])
-    y = np.array([])
-    for i in range(0, np.size(count)):
-        if i+1 == 7 or count[i] == 0:
-            continue
-        xtmp, ytmp = GenSpotPts(count[i], i, dict)
-        x = np.append(x, xtmp, axis=0)
-        y = np.append(y, ytmp, axis=0)
-    return x, y
-
-
 def GenWinterPts(n, dict=spotDict, numbers=[]):
+    """
+    Generate winter points based on predefined locations and probabilities.
+    
+    Parameters:
+        n (int): Number of points to generate
+        dict (dict, optional): Dictionary containing spot information. Defaults to spotDict.
+        numbers (list, optional): List of specific spot indices to use. Defaults to [].
+    
+    Returns:
+        tuple: (x, y) arrays of generated points
+    """
     spotWeights = np.array([0, (50 + 500)/2, (500 + 700)/2, (30 + 200)/2, (100 + 1000)/2,
      (100 + 1000)/2, (30 + 150)/2, (50 + 500)/2, (20 + 300)/2, (100 + 2000)/2,
       (100 + 1000)/2, (50 + 500)/2, (50 + 600)/2, (10 + 100)/2, (20 + 200)/2,
@@ -588,7 +680,15 @@ def GenWinterPts(n, dict=spotDict, numbers=[]):
             y = np.append(y, ytmp, axis=0)
     return x, y
 
+
 def drawPts(x, y):
+    """
+    Draw points on the map.
+    
+    Parameters:
+        x (numpy.array): Array of x-coordinates
+        y (numpy.array): Array of y-coordinates
+    """
     img = plt.imread("data/canvas_new_fish.png")
     width = 4113
     height = 3145
@@ -607,27 +707,90 @@ vertMetersInPix = geopy.distance.geodesic(PixelToDecimalVec(pinpoint1pix), Pixel
 horzMetersInPix = geopy.distance.geodesic(PixelToDecimalVec(pinpoint1pix), PixelToDecimalVec(pinpoint2pix)).km / (pinpoint2pix[0] - pinpoint1pix[0])
 
 def distPointToPoint(pt1pix, pt2pix):
+    """
+    Calculate distance between two points in kilometers.
+    
+    Parameters:
+        pt1pix (numpy.array): First point coordinates
+        pt2pix (numpy.array): Second point coordinates
+    
+    Returns:
+        float: Distance in kilometers
+    """
     return np.sqrt(np.sum(((np.array([pt1pix]) - np.array([pt2pix])) * np.array([horzMetersInPix, vertMetersInPix])) ** 2, axis=1))[0]
 
 def distPointToPointArr(pt1pix, pt2pix):
+    """
+    Calculate distance between a point and an array of points in kilometers.
+    
+    Parameters:
+        pt1pix (numpy.array): Point coordinates
+        pt2pix (numpy.array): Array of point coordinates
+    
+    Returns:
+        float: Distance in kilometers
+    """
     return np.sqrt(np.sum(((np.array([pt1pix]) - pt2pix) * np.array([horzMetersInPix, vertMetersInPix])) ** 2, axis=1))[0]
 
 def distPointToArray(pt1pix, arrpix):
+    """
+    Calculate distances from a point to an array of points in kilometers.
+    
+    Parameters:
+        pt1pix (numpy.array): Point coordinates
+        arrpix (numpy.array): Array of point coordinates
+    
+    Returns:
+        numpy.array: Array of distances in kilometers
+    """
     return np.sqrt(np.sum(((arrpix - pt1pix) * np.array([horzMetersInPix, vertMetersInPix])) ** 2, axis=1))
 
 def DotsFromSegment(pt1, pt2, n=40):
+    """
+    Generate evenly spaced dots along a line segment.
+    
+    Parameters:
+        pt1 (numpy.array): Start point coordinates
+        pt2 (numpy.array): End point coordinates
+        n (int, optional): Number of dots to generate. Defaults to 40.
+    
+    Returns:
+        numpy.array: Array of dot coordinates
+    """
     return np.linspace(pt1, pt2, n)
 
 def nodeFromIndex(i, j, px):
+    """
+    Convert 2D grid indices to a 1D node index.
+    
+    Parameters:
+        i (int): Row index
+        j (int): Column index
+        px (int): Width of the grid
+    
+    Returns:
+        int: Node index
+    """
     return i * px + j
 
 
 def makeHalfGraph(mask2d, mesh, checkFreq=40): 
+    """
+    Create a graph from a 2D mask, connecting adjacent nodes with valid paths.
+    
+    Parameters:
+        mask2d (numpy.array): 2D boolean mask indicating valid nodes
+        mesh (numpy.array): Array of node coordinates
+        checkFreq (int, optional): Frequency of intermediate points for path validation. Defaults to 40.
+    
+    Returns:
+        networkx.Graph: Graph with nodes and weighted edges
+    """
     shape = np.shape(mask2d)
     px = shape[1]
     py = shape[0]
     G = nx.Graph()
-    #dict = {}
+    
     for i in range(py):
         for j in range(px):
             fromInd = nodeFromIndex(i, j, px)
@@ -1417,6 +1580,17 @@ def makeHalfGraph(mask2d, mesh, checkFreq=40):
 
 
 def closestNodeInMesh(mesh, mask, pt):
+    """
+    Find the closest node in a mesh to a given point.
+    
+    Parameters:
+        mesh (numpy.array): Array of node coordinates
+        mask (numpy.array): Boolean mask indicating valid nodes
+        pt (numpy.array): Target point coordinates
+    
+    Returns:
+        tuple: (closest_node_coordinates, node_index)
+    """
     height = 3145
     ptTmp = np.copy(pt)
     ptTmp[1] = -ptTmp[1] + height
@@ -1428,6 +1602,14 @@ def closestNodeInMesh(mesh, mask, pt):
 
 
 def plotGraph(mesh, mask, G):
+    """
+    Plot a graph visualization.
+    
+    Parameters:
+        mesh (numpy.array): Array of node coordinates
+        mask (numpy.array): Boolean mask indicating valid nodes
+        G (networkx.Graph): Graph to plot
+    """
     fig, ax = plt.subplots()
     plt.scatter(mesh.T[0], -mesh.T[1] + height, s=1)
     plt.scatter(mesh[mask].T[0], -mesh[mask].T[1] + height, s=1)
@@ -1439,6 +1621,16 @@ def plotGraph(mesh, mask, G):
         
         
 def makeGraph(l=40, checkFreq=40):
+    """
+    Create a navigation graph by combining north and south region graphs.
+    
+    Parameters:
+        l (int, optional): Grid cell size. Defaults to 40.
+        checkFreq (int, optional): Frequency of intermediate points for path validation. Defaults to 40.
+    
+    Returns:
+        tuple: (graph, mesh, mask) - The created graph, node coordinates, and valid node mask
+    """
     width = 4113
     height = 3145
     px, py = (int(width/l), int(height/l))
@@ -1525,6 +1717,19 @@ print(f"Время выполнения: {elapsed_time} секунд")
 '''  
 
 def ClosestPathWithTraceNew(ptsFrom, ptsTo, velocities):
+    """
+    Calculate optimal paths from multiple starting points to multiple destination points
+    using direct path calculations.
+    
+    Parameters:
+        ptsFrom (numpy.array): Array of starting point coordinates
+        ptsTo (numpy.array): Array of destination point coordinates
+        velocities (numpy.array): Array of velocities for each starting point
+    
+    Returns:
+        tuple: (filtered_destinations, minimum_times, plot_data) - Filtered destination points,
+               minimum travel times, and data for plotting
+    """
     # подсчёт метров в пикселе по вертикали и по горизонтали
     pinpoint1pix = (862, 1111)
     pinpoint2pix = (1569, 1111)
@@ -2250,7 +2455,20 @@ def ClosestPathWithTraceNew(ptsFrom, ptsTo, velocities):
     return ptsTo[preciseMask], ptsToMinTimes[preciseMask], precPlotData
 
 
-def PlotMap(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom=True, viewTo=True, nameinsert=''):
+def PlotMap(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom=True, viewTo=True, nameinsert='', stations=None):
+    """
+    Generate a plot showing optimal paths on a map.
+    
+    Parameters:
+        ptsFromPix (numpy.array): Array of starting point coordinates
+        ptsToPix (numpy.array): Array of destination point coordinates
+        plotData (list): List of path data for plotting
+        linewidth (float, optional): Width of path lines. Defaults to 0.75.
+        viewFrom (bool, optional): Whether to show starting points. Defaults to True.
+        viewTo (bool, optional): Whether to show destination points. Defaults to True.
+        nameinsert (str, optional): String to insert in the output filename. Defaults to ''.
+        stations (list, optional): List of station information. Defaults to None.
+    """
     ptsFromPix = np.array(ptsFromPix)
     ptsToPix = np.array(ptsToPix)
     img = plt.imread("data/canvas_new_fish_gray.png")
@@ -2279,75 +2497,43 @@ def PlotMap(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom=True, viewT
         x = ptsFromPix.T[0]
         y = -ptsFromPix.T[1] + height
         plt.scatter(x, y, s=16, marker='s', color='r', edgecolor='black', linewidth=0.6, zorder=15)
+        
+        # Add station names if provided
+        if stations and len(stations) == len(ptsFromPix):
+            for i, (station_x, station_y) in enumerate(zip(x, y)):
+                # Use actual station name, not a generated name
+                station_name = stations[i].name if hasattr(stations[i], 'name') else f"Станция {i+1}"
+                plt.annotate(
+                    station_name,
+                    (station_x, station_y),
+                    xytext=(5, 5),
+                    textcoords='offset points',
+                    fontsize=6,  # Smaller font size
+                    fontweight='bold',
+                    bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="black", alpha=0.8),
+                    zorder=20
+                )
 
     ax.set_ylim([0, height])
     ax.set_xlim([0, width])
     plt.savefig(f'output/plot_example{nameinsert}.png')
     #plt.savefig(f'output/plot_example{nameinsert}_hires.png', dpi=450, bbox_inches='tight')
     #plt.show()
-'''  
-#def PlotMapFast(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom=True, viewTo=True):
-    ptsFromPix = np.array(ptsFromPix)
-    ptsToPix = np.array(ptsToPix)
-    img = plt.imread("data/canvas_new_fish_gray.png")
-    width = 4113
-    height = 3145
 
-    fig, ax = plt.subplots()
-    ax.imshow(img, extent=[0, width, 0, height])
-    ax.axis('equal')
+def PlotMapReachability(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom=True, viewTo=True, nameinsert='', stations=None):
+    """
+    Generate a reachability map showing travel times as a color gradient.
     
-    x_values = []
-    y_values = []
-    colors = []
-    linewidths = []
-
-    maxTime = max(plot[2] for plot in plotData)
-    dumps = 11
-    time_gaps = np.linspace(0, maxTime, dumps)
-    for q in range(dumps):
-        x_values.append([])
-        y_values.append([])
-        if q != dumps - 1:
-            colors.append(cm.Purples((time_gaps[q] + time_gaps[q + 1]) / 2 / maxTime))
-        else:
-            colors.append(cm.Purples(1))
-    
-    for plot in plotData:
-        x = plot[0]
-        y = plot[1]
-        time = plot[2]
-        
-        if time == time_gaps[-1]:
-            x_values[-1].append(x)
-            y_values[-1].append(y)
-        for q in range(dumps - 1):
-            if time >= time_gaps[q] and time < time_gaps[q + 1]:
-                x_values[q].append(x)
-                y_values[q].append(y)
-                break
-    
-    for q in range(dumps - 1):
-        if len(x_values[q]) == 1:
-            plt.plot(x_values[q][0], y_values[q][0], color=colors[q], linewidth=linewidth, zorder=5)
-        elif len(x_values[q]) > 1:
-            plt.plot(x_values[q], y_values[q], color=colors[q], linewidth=linewidth, zorder=5)
-
-    if viewTo:
-        x = ptsToPix.T[0]
-        y = -ptsToPix.T[1] + height
-        plt.scatter(x, y, s=2, zorder=10)
-
-    if viewFrom:
-        x = ptsFromPix.T[0]
-        y = -ptsFromPix.T[1] + height
-        plt.scatter(x, y, s=16, marker='s', color='r', zorder=15)
-
-    ax.set_ylim([0, height])
-    ax.set_xlim([0, width])
-    plt.savefig('plot_example.png') #не вышло
-'''
-def PlotMapReachability(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom=True, viewTo=True, nameinsert=''):
+    Parameters:
+        ptsFromPix (numpy.array): Array of starting point coordinates
+        ptsToPix (numpy.array): Array of destination point coordinates
+        plotData (list): List of path data for plotting
+        linewidth (float, optional): Width of path lines. Defaults to 0.75.
+        viewFrom (bool, optional): Whether to show starting points. Defaults to True.
+        viewTo (bool, optional): Whether to show destination points. Defaults to True.
+        nameinsert (str, optional): String to insert in the output filename. Defaults to ''.
+        stations (list, optional): List of station information. Defaults to None.
+    """
     ptsFromPix = np.array(ptsFromPix)
     ptsToPix = np.array(ptsToPix)
     img = plt.imread("data/canvas_new_fish_gray.png")
@@ -2377,13 +2563,42 @@ def PlotMapReachability(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom
         x = ptsFromPix.T[0]
         y = -ptsFromPix.T[1] + height
         plt.scatter(x, y, s=16, marker='s', color='r', edgecolor='black', linewidth=0.6, zorder=15)
+        
+        # Add station names if provided
+        if stations and len(stations) == len(ptsFromPix):
+            for i, (station_x, station_y) in enumerate(zip(x, y)):
+                # Use actual station name, not a generated name
+                station_name = stations[i].name if hasattr(stations[i], 'name') else f"Станция {i+1}"
+                plt.annotate(
+                    station_name,
+                    (station_x, station_y),
+                    xytext=(5, 5),
+                    textcoords='offset points',
+                    fontsize=6,  # Smaller font size
+                    fontweight='bold',
+                    bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="black", alpha=0.8),
+                    zorder=20
+                )
 
     ax.set_ylim([0, height])
     ax.set_xlim([0, width])
     plt.savefig(f'output/plot_reachability_example{nameinsert}.png')
     #plt.savefig(f'output/plot_reachability_example{nameinsert}_hires.png', dpi=450, bbox_inches='tight')
 
-def PlotMapDifStReachability(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom=True, viewTo=True, nameinsert=''):
+def PlotMapDifStReachability(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom=True, viewTo=True, nameinsert='', stations=None):
+    """
+    Generate a differential station reachability map showing which station is optimal for each point.
+    
+    Parameters:
+        ptsFromPix (numpy.array): Array of starting point coordinates
+        ptsToPix (numpy.array): Array of destination point coordinates
+        plotData (list): List of path data for plotting
+        linewidth (float, optional): Width of path lines. Defaults to 0.75.
+        viewFrom (bool, optional): Whether to show starting points. Defaults to True.
+        viewTo (bool, optional): Whether to show destination points. Defaults to True.
+        nameinsert (str, optional): String to insert in the output filename. Defaults to ''.
+        stations (list, optional): List of station information. Defaults to None.
+    """
     ptsFromPix = np.array(ptsFromPix)
     ptsToPix = np.array(ptsToPix)
     img = plt.imread("data/canvas_new_fish_gray.png")
@@ -2419,6 +2634,23 @@ def PlotMapDifStReachability(ptsFromPix, ptsToPix, plotData, linewidth=0.75, vie
         x = ptsFromPix.T[0]
         y = -ptsFromPix.T[1] + height
         plt.scatter(x, y, s=16, marker='s', color='r', edgecolor='black', linewidth=0.6, zorder=15)
+        
+        # Add station names if provided
+        if stations and len(stations) == len(ptsFromPix):
+            for i, (station_x, station_y) in enumerate(zip(x, y)):
+                # Use actual station name, not a generated name
+                station_name = stations[i].name if hasattr(stations[i], 'name') else f"Станция {i+1}"
+                plt.annotate(
+                    station_name,
+                    (station_x, station_y),
+                    xytext=(5, 5),
+                    textcoords='offset points',
+                    fontsize=6,  # Smaller font size
+                    fontweight='bold',
+                    bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="black", alpha=0.8),
+                    zorder=20
+                )
+                
     plt.savefig(f'output/plot_reachability_difSt_example{nameinsert}.png')
     #plt.savefig(f'output/plot_reachability_difSt_example{nameinsert}_hires.png', dpi=450, bbox_inches='tight')
 #PlotMap(ptsFromPix, ptsToPix, answ3)
@@ -2426,6 +2658,22 @@ def PlotMapDifStReachability(ptsFromPix, ptsToPix, plotData, linewidth=0.75, vie
 
 
 def ClosestPathWithTraceDijkstra(ptsFrom, ptsTo, velocities, G, mesh, mask):
+    """
+    Calculate optimal paths from multiple starting points to multiple destination points
+    using Dijkstra's algorithm for path finding.
+    
+    Parameters:
+        ptsFrom (numpy.array): Array of starting point coordinates
+        ptsTo (numpy.array): Array of destination point coordinates
+        velocities (numpy.array): Array of velocities for each starting point
+        G (networkx.Graph): Navigation graph
+        mesh (numpy.array): Array of node coordinates
+        mask (numpy.array): Boolean mask indicating valid nodes
+    
+    Returns:
+        tuple: (filtered_destinations, minimum_times, plot_data) - Filtered destination points,
+               minimum travel times, and data for plotting
+    """
     width = 4113
     height = 3145
     
@@ -2511,6 +2759,18 @@ def ClosestPathWithTraceDijkstra(ptsFrom, ptsTo, velocities, G, mesh, mask):
 
 
 def expMakeLine(stationCoords, velocities, N):
+    """
+    Run an experiment using direct line path calculations.
+    
+    Parameters:
+        stationCoords (list): List of station coordinates
+        velocities (numpy.array): Array of velocities for each station
+        N (int): Number of destination points to generate
+    
+    Returns:
+        tuple: (starting_points, destinations, minimum_times, plot_data) - Starting points,
+               destination points, minimum travel times, and data for plotting
+    """
     ptsFromPix = []
     for i in stationCoords:
         tmp = (DegreesToDecimalVec(i[0]), DegreesToDecimalVec(i[1]))
@@ -2526,6 +2786,21 @@ def expMakeLine(stationCoords, velocities, N):
     return ptsFromPix, ptsTo, ptsToMinTimes, plotData
 
 def expMakeGraph(stationCoords, velocities, N, G, Gmesh, Gmask):
+    """
+    Run an experiment using graph-based path calculations.
+    
+    Parameters:
+        stationCoords (list): List of station coordinates
+        velocities (numpy.array): Array of velocities for each station
+        N (int): Number of destination points to generate
+        G (networkx.Graph): Navigation graph
+        Gmesh (numpy.array): Array of node coordinates
+        Gmask (numpy.array): Boolean mask indicating valid nodes
+    
+    Returns:
+        tuple: (starting_points, destinations, minimum_times, plot_data) - Starting points,
+               destination points, minimum travel times, and data for plotting
+    """
     ptsFromPix = []
     for i in stationCoords:
         tmp = (DegreesToDecimalVec(i[0]), DegreesToDecimalVec(i[1]))
@@ -2542,10 +2817,19 @@ def expMakeGraph(stationCoords, velocities, N, G, Gmesh, Gmask):
 
 
 def probsFromTimes(times, m=10, theta=25):
+    """
+    Calculate probabilities from travel times using an exponential decay function.
+    
+    Parameters:
+        times (numpy.array): Array of travel times
+        m (int, optional): Minimum time parameter. Defaults to 10.
+        theta (int, optional): Decay parameter. Defaults to 25.
+    
+    Returns:
+        numpy.array: Array of probabilities
+    """
     lmd = np.log(2) * theta * (theta - m) / m
-    #print('Lambda is:', lmd)
     inner = (1 / np.float128(theta) - 1 / (theta - times.astype(np.float128)))
-    #print('Inner is:', inner)
     return np.exp(inner * lmd)
 
  
