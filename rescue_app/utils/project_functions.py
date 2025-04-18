@@ -615,7 +615,7 @@ def GenSpotPts(n, i, dict=spotDict):
     """
     if i+1 == 7 or n == 0:
         return None
-
+    
     spotInfo = dict[i + 1]
     weightsLocal = np.array(spotInfo[3])
     intervalsLocal = np.cumsum(weightsLocal)
@@ -774,7 +774,7 @@ def nodeFromIndex(i, j, px):
     return i * px + j
 
 
-def makeHalfGraph(mask2d, mesh, checkFreq=40): 
+def makeHalfGraph(mask2d, mesh, checkFreq=40):
     """
     Create a graph from a 2D mask, connecting adjacent nodes with valid paths.
     
@@ -798,96 +798,96 @@ def makeHalfGraph(mask2d, mesh, checkFreq=40):
             if mask2d[i][j] == True:
                 if i != 0:
                     if mask2d[i - 1][j] == True:
-                        toInd = nodeFromIndex(i - 1, j, px)
-                        pt2 = mesh[toInd]
-                        dots = DotsFromSegment(pt1, pt2, checkFreq)
-                        if not pathKron.contains_points(dots).any():
-                            weight = distPointToPoint(pt1, pt2)
-                            G.add_edge(fromInd, toInd, weight=weight)
+                    toInd = nodeFromIndex(i - 1, j, px)
+                    pt2 = mesh[toInd]
+                    dots = DotsFromSegment(pt1, pt2, checkFreq)
+                    if not pathKron.contains_points(dots).any():
+                        weight = distPointToPoint(pt1, pt2)
+                        G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if j != px - 1:
                     if mask2d[i][j + 1] == True:
-                        toInd = nodeFromIndex(i, j + 1, px)
-                        pt2 = mesh[toInd]
-                        dots = DotsFromSegment(pt1, pt2, checkFreq)
-                        if not pathKron.contains_points(dots).any():
-                            weight = distPointToPoint(pt1, pt2)
-                            G.add_edge(fromInd, toInd, weight=weight)
+                    toInd = nodeFromIndex(i, j + 1, px)
+                    pt2 = mesh[toInd]
+                    dots = DotsFromSegment(pt1, pt2, checkFreq)
+                    if not pathKron.contains_points(dots).any():
+                        weight = distPointToPoint(pt1, pt2)
+                        G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if i != py - 1:
                     if mask2d[i + 1][j] == True:
-                        toInd = nodeFromIndex(i + 1, j, px)
-                        pt2 = mesh[toInd]
-                        dots = DotsFromSegment(pt1, pt2, checkFreq)
-                        if not pathKron.contains_points(dots).any():
-                            weight = distPointToPoint(pt1, pt2)
-                            G.add_edge(fromInd, toInd, weight=weight)
+                    toInd = nodeFromIndex(i + 1, j, px)
+                    pt2 = mesh[toInd]
+                    dots = DotsFromSegment(pt1, pt2, checkFreq)
+                    if not pathKron.contains_points(dots).any():
+                        weight = distPointToPoint(pt1, pt2)
+                        G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if j != 0:
                     if mask2d[i][j - 1] == True:
-                        toInd = nodeFromIndex(i, j - 1, px)
-                        pt2 = mesh[toInd]
-                        dots = DotsFromSegment(pt1, pt2, checkFreq)
-                        if not pathKron.contains_points(dots).any():
-                            weight = distPointToPoint(pt1, pt2)
-                            G.add_edge(fromInd, toInd, weight=weight)
+                    toInd = nodeFromIndex(i, j - 1, px)
+                    pt2 = mesh[toInd]
+                    dots = DotsFromSegment(pt1, pt2, checkFreq)
+                    if not pathKron.contains_points(dots).any():
+                        weight = distPointToPoint(pt1, pt2)
+                        G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if i != 0 and j != px - 1:
                     if mask2d[i - 1][j + 1] == True:
-                        toInd = nodeFromIndex(i - 1, j + 1, px)
-                        pt2 = mesh[toInd]
-                        dots = DotsFromSegment(pt1, pt2, checkFreq)
-                        if not pathKron.contains_points(dots).any():
-                            weight = distPointToPoint(pt1, pt2)
-                            G.add_edge(fromInd, toInd, weight=weight)
+                    toInd = nodeFromIndex(i - 1, j + 1, px)
+                    pt2 = mesh[toInd]
+                    dots = DotsFromSegment(pt1, pt2, checkFreq)
+                    if not pathKron.contains_points(dots).any():
+                        weight = distPointToPoint(pt1, pt2)
+                        G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if j != px - 1 and i != py - 1:
                     if mask2d[i + 1][j + 1] == True:
-                        toInd = nodeFromIndex(i + 1, j + 1, px)
-                        pt2 = mesh[toInd]
-                        dots = DotsFromSegment(pt1, pt2, checkFreq)
-                        if not pathKron.contains_points(dots).any():
-                            weight = distPointToPoint(pt1, pt2)
-                            G.add_edge(fromInd, toInd, weight=weight)
+                    toInd = nodeFromIndex(i + 1, j + 1, px)
+                    pt2 = mesh[toInd]
+                    dots = DotsFromSegment(pt1, pt2, checkFreq)
+                    if not pathKron.contains_points(dots).any():
+                        weight = distPointToPoint(pt1, pt2)
+                        G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if i != py - 1 and j != 0:
                     if mask2d[i + 1][j - 1] == True:
-                        toInd = nodeFromIndex(i + 1, j - 1, px)
-                        pt2 = mesh[toInd]
-                        dots = DotsFromSegment(pt1, pt2, checkFreq)
-                        if not pathKron.contains_points(dots).any():
-                            weight = distPointToPoint(pt1, pt2)
-                            G.add_edge(fromInd, toInd, weight=weight)
+                    toInd = nodeFromIndex(i + 1, j - 1, px)
+                    pt2 = mesh[toInd]
+                    dots = DotsFromSegment(pt1, pt2, checkFreq)
+                    if not pathKron.contains_points(dots).any():
+                        weight = distPointToPoint(pt1, pt2)
+                        G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if j != 0 and i != 0:
                     if mask2d[i - 1][j - 1] == True:
-                        toInd = nodeFromIndex(i - 1, j - 1, px)
-                        pt2 = mesh[toInd]
-                        dots = DotsFromSegment(pt1, pt2, checkFreq)
-                        if not pathKron.contains_points(dots).any():
-                            weight = distPointToPoint(pt1, pt2)
-                            G.add_edge(fromInd, toInd, weight=weight)
+                    toInd = nodeFromIndex(i - 1, j - 1, px)
+                    pt2 = mesh[toInd]
+                    dots = DotsFromSegment(pt1, pt2, checkFreq)
+                    if not pathKron.contains_points(dots).any():
+                        weight = distPointToPoint(pt1, pt2)
+                        G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
@@ -993,12 +993,12 @@ def makeHalfGraph(mask2d, mesh, checkFreq=40):
                 if i > 2 and j < px - 1:
                     if mask2d[i - 3][j + 1] == True:
                         toInd = nodeFromIndex(i - 3, j + 1, px)
-                        pt2 = mesh[toInd]
-                        dots = DotsFromSegment(pt1, pt2, checkFreq)
-                        if not pathKron.contains_points(dots).any():
-                            weight = distPointToPoint(pt1, pt2)
-                            G.add_edge(fromInd, toInd, weight=weight)
-                            
+                            pt2 = mesh[toInd]
+                            dots = DotsFromSegment(pt1, pt2, checkFreq)
+                            if not pathKron.contains_points(dots).any():
+                                weight = distPointToPoint(pt1, pt2)
+                                G.add_edge(fromInd, toInd, weight=weight)
+    
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
@@ -1619,7 +1619,7 @@ def plotGraph(mesh, mask, G):
         y = [-mesh[i][1] + height, -mesh[j][1] + height]
         plt.plot(x, y)
         
-        
+
 def makeGraph(l=40, checkFreq=40):
     """
     Create a navigation graph by combining north and south region graphs.
@@ -2563,8 +2563,8 @@ def PlotMapReachability(ptsFromPix, ptsToPix, plotData, linewidth=0.75, viewFrom
         x = ptsFromPix.T[0]
         y = -ptsFromPix.T[1] + height
         plt.scatter(x, y, s=16, marker='s', color='r', edgecolor='black', linewidth=0.6, zorder=15)
-        
-        # Add station names if provided
+            
+            # Add station names if provided
         if stations and len(stations) == len(ptsFromPix):
             for i, (station_x, station_y) in enumerate(zip(x, y)):
                 # Use actual station name, not a generated name
@@ -2634,8 +2634,8 @@ def PlotMapDifStReachability(ptsFromPix, ptsToPix, plotData, linewidth=0.75, vie
         x = ptsFromPix.T[0]
         y = -ptsFromPix.T[1] + height
         plt.scatter(x, y, s=16, marker='s', color='r', edgecolor='black', linewidth=0.6, zorder=15)
-        
-        # Add station names if provided
+            
+            # Add station names if provided
         if stations and len(stations) == len(ptsFromPix):
             for i, (station_x, station_y) in enumerate(zip(x, y)):
                 # Use actual station name, not a generated name
@@ -2714,20 +2714,20 @@ def ClosestPathWithTraceDijkstra(ptsFrom, ptsTo, velocities, G, mesh, mask):
         distsTo.append(distPointToPoint(np.array([ptTo[0], -ptTo[1] + height]), ptToNode))
     distsTo = np.array(distsTo)
     ptToNodes = np.array(ptToNodes)
-        
+    
     traces = {}
     for i in range(np.shape(ptsFrom)[0]):
         traces[ptFromInds[i]] = {}
     for i in range(np.shape(ptsFrom)[0]):
         dists = []
         ptFromInd = ptFromInds[i]
-        distsTmp, tracesTmp = nx.single_source_dijkstra(G, ptFromInd)
-        for j in range(np.shape(ptsTo)[0]):
-            ptToInd = ptToInds[j]
-            dists.append(distsTmp[ptToInd])
+            distsTmp, tracesTmp = nx.single_source_dijkstra(G, ptFromInd)
+            for j in range(np.shape(ptsTo)[0]):
+                ptToInd = ptToInds[j]
+                    dists.append(distsTmp[ptToInd])
             traces[ptFromInds[i]][ptToInds[j]] = tracesTmp[ptToInd]
-        dists = np.array(dists) + distsFrom[i] + distsTo
-        times = np.append(times, np.array([dists / velocities[i]]), axis=0)
+            dists = np.array(dists) + distsFrom[i] + distsTo
+            times = np.append(times, np.array([dists / velocities[i]]), axis=0)
     i_args = np.argmin(times, axis=0)
     
     ptsToTimes = []
@@ -2735,23 +2735,23 @@ def ClosestPathWithTraceDijkstra(ptsFrom, ptsTo, velocities, G, mesh, mask):
         ptsToTimes.append(times[i_args[i]][i])
     ptsToTimes = np.array(ptsToTimes)
     
-    plotData = []     
+    plotData = []
     for i in range(np.shape(ptsTo)[0]):
         optimalStationNumber = i_args[i]
         ptFrom = ptsFrom[optimalStationNumber]
         ptTo = ptsTo[i]
-        trace = traces[ptFromInds[optimalStationNumber]][ptToInds[i]]
-        x = [ptFrom[0]]
-        y = [-ptFrom[1] + height]
+            trace = traces[ptFromInds[optimalStationNumber]][ptToInds[i]]
+            x = [ptFrom[0]]
+            y = [-ptFrom[1] + height]
         for j in range(len(trace)-1):
-            ind = trace[j]
-            x.append(mesh[ind][0])
-            y.append(-mesh[ind][1] + height)
-        x.append(ptTo[0])
-        y.append(-ptTo[1] + height)
-        x = np.array(x)
-        y = np.array(y)
-        plotData.append([x, y, ptsToTimes[i], 0, optimalStationNumber])
+                ind = trace[j]
+                x.append(mesh[ind][0])
+                y.append(-mesh[ind][1] + height)
+            x.append(ptTo[0])
+            y.append(-ptTo[1] + height)
+            x = np.array(x)
+            y = np.array(y)
+            plotData.append([x, y, ptsToTimes[i], 0, optimalStationNumber])
     
     
     # x, y, time, skip, frompt
@@ -2818,18 +2818,54 @@ def expMakeGraph(stationCoords, velocities, N, G, Gmesh, Gmask):
 
 def probsFromTimes(times, m=10, theta=25):
     """
-    Calculate probabilities from travel times using an exponential decay function.
+    Calculate survival probability for a given rescue time.
+    
+    This function calculates the probability of a person surviving at least 
+    t minutes in cold water, where t is the rescue time.
     
     Parameters:
-        times (numpy.array): Array of travel times
-        m (int, optional): Minimum time parameter. Defaults to 10.
-        theta (int, optional): Decay parameter. Defaults to 25.
+        times (numpy.array): Array of rescue times in minutes
+        m (float, optional): Median survival time in minutes. Defaults to 10.
+        theta (float, optional): Maximum survival time in minutes. Defaults to 25.
     
     Returns:
-        numpy.array: Array of probabilities
+        numpy.array: Array of survival probabilities
     """
-    lmd = np.log(2) * theta * (theta - m) / m
-    inner = (1 / np.float128(theta) - 1 / (theta - times.astype(np.float128)))
-    return np.exp(inner * lmd)
+    # Convert inputs to float64 for numerical stability
+    m = np.float64(m)
+    theta = np.float64(theta)
+    times = np.asarray(times, dtype=np.float64)
+    
+    # Calculate gamma parameter (scale parameter from median survival time)
+    gamma_val = np.log(2) * theta * (theta - m) / m
+    
+    # Initialize result array with zeros (no survival chance for times >= theta)
+    result = np.zeros_like(times, dtype=np.float64)
+    
+    # Find valid times (0 < times < theta)
+    valid_mask = (times > 0) & (times < theta)
+    
+    if np.any(valid_mask):
+        valid_times = times[valid_mask]
+        
+        # Calculate survival probability using the formula:
+        # P(survival at least t minutes) = exp(-gamma * t / (theta * (theta - t)))
+        
+        # Calculate the exponent in a numerically stable way
+        exponent = -gamma_val * valid_times / (theta * (theta - valid_times))
+        
+        # Clip exponent to avoid underflow in exp()
+        exponent = np.clip(exponent, -700, 0)
+        
+        # Compute survival probability
+        result[valid_mask] = np.exp(exponent)
+    
+    # For times <= 0, survival probability is 1
+    result[times <= 0] = 1.0
+    
+    # Safety check: ensure probabilities are in valid range [0,1]
+    result = np.clip(result, 0, 1)
+    
+    return result
 
  
