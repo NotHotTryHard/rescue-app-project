@@ -798,96 +798,96 @@ def makeHalfGraph(mask2d, mesh, checkFreq=40):
             if mask2d[i][j] == True:
                 if i != 0:
                     if mask2d[i - 1][j] == True:
-                    toInd = nodeFromIndex(i - 1, j, px)
-                    pt2 = mesh[toInd]
-                    dots = DotsFromSegment(pt1, pt2, checkFreq)
-                    if not pathKron.contains_points(dots).any():
-                        weight = distPointToPoint(pt1, pt2)
-                        G.add_edge(fromInd, toInd, weight=weight)
+                        toInd = nodeFromIndex(i - 1, j, px)
+                        pt2 = mesh[toInd]
+                        dots = DotsFromSegment(pt1, pt2, checkFreq)
+                        if not pathKron.contains_points(dots).any():
+                            weight = distPointToPoint(pt1, pt2)
+                            G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if j != px - 1:
                     if mask2d[i][j + 1] == True:
-                    toInd = nodeFromIndex(i, j + 1, px)
-                    pt2 = mesh[toInd]
-                    dots = DotsFromSegment(pt1, pt2, checkFreq)
-                    if not pathKron.contains_points(dots).any():
-                        weight = distPointToPoint(pt1, pt2)
-                        G.add_edge(fromInd, toInd, weight=weight)
+                        toInd = nodeFromIndex(i, j + 1, px)
+                        pt2 = mesh[toInd]
+                        dots = DotsFromSegment(pt1, pt2, checkFreq)
+                        if not pathKron.contains_points(dots).any():
+                            weight = distPointToPoint(pt1, pt2)
+                            G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if i != py - 1:
                     if mask2d[i + 1][j] == True:
-                    toInd = nodeFromIndex(i + 1, j, px)
-                    pt2 = mesh[toInd]
-                    dots = DotsFromSegment(pt1, pt2, checkFreq)
-                    if not pathKron.contains_points(dots).any():
-                        weight = distPointToPoint(pt1, pt2)
-                        G.add_edge(fromInd, toInd, weight=weight)
+                        toInd = nodeFromIndex(i + 1, j, px)
+                        pt2 = mesh[toInd]
+                        dots = DotsFromSegment(pt1, pt2, checkFreq)
+                        if not pathKron.contains_points(dots).any():
+                            weight = distPointToPoint(pt1, pt2)
+                            G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if j != 0:
                     if mask2d[i][j - 1] == True:
-                    toInd = nodeFromIndex(i, j - 1, px)
-                    pt2 = mesh[toInd]
-                    dots = DotsFromSegment(pt1, pt2, checkFreq)
-                    if not pathKron.contains_points(dots).any():
-                        weight = distPointToPoint(pt1, pt2)
-                        G.add_edge(fromInd, toInd, weight=weight)
+                        toInd = nodeFromIndex(i, j - 1, px)
+                        pt2 = mesh[toInd]
+                        dots = DotsFromSegment(pt1, pt2, checkFreq)
+                        if not pathKron.contains_points(dots).any():
+                            weight = distPointToPoint(pt1, pt2)
+                            G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if i != 0 and j != px - 1:
                     if mask2d[i - 1][j + 1] == True:
-                    toInd = nodeFromIndex(i - 1, j + 1, px)
-                    pt2 = mesh[toInd]
-                    dots = DotsFromSegment(pt1, pt2, checkFreq)
-                    if not pathKron.contains_points(dots).any():
-                        weight = distPointToPoint(pt1, pt2)
-                        G.add_edge(fromInd, toInd, weight=weight)
+                        toInd = nodeFromIndex(i - 1, j + 1, px)
+                        pt2 = mesh[toInd]
+                        dots = DotsFromSegment(pt1, pt2, checkFreq)
+                        if not pathKron.contains_points(dots).any():
+                            weight = distPointToPoint(pt1, pt2)
+                            G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if j != px - 1 and i != py - 1:
                     if mask2d[i + 1][j + 1] == True:
-                    toInd = nodeFromIndex(i + 1, j + 1, px)
-                    pt2 = mesh[toInd]
-                    dots = DotsFromSegment(pt1, pt2, checkFreq)
-                    if not pathKron.contains_points(dots).any():
-                        weight = distPointToPoint(pt1, pt2)
-                        G.add_edge(fromInd, toInd, weight=weight)
+                        toInd = nodeFromIndex(i + 1, j + 1, px)
+                        pt2 = mesh[toInd]
+                        dots = DotsFromSegment(pt1, pt2, checkFreq)
+                        if not pathKron.contains_points(dots).any():
+                            weight = distPointToPoint(pt1, pt2)
+                            G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if i != py - 1 and j != 0:
                     if mask2d[i + 1][j - 1] == True:
-                    toInd = nodeFromIndex(i + 1, j - 1, px)
-                    pt2 = mesh[toInd]
-                    dots = DotsFromSegment(pt1, pt2, checkFreq)
-                    if not pathKron.contains_points(dots).any():
-                        weight = distPointToPoint(pt1, pt2)
-                        G.add_edge(fromInd, toInd, weight=weight)
+                        toInd = nodeFromIndex(i + 1, j - 1, px)
+                        pt2 = mesh[toInd]
+                        dots = DotsFromSegment(pt1, pt2, checkFreq)
+                        if not pathKron.contains_points(dots).any():
+                            weight = distPointToPoint(pt1, pt2)
+                            G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
                             #    dict[toInd] = [fromInd]
                 if j != 0 and i != 0:
                     if mask2d[i - 1][j - 1] == True:
-                    toInd = nodeFromIndex(i - 1, j - 1, px)
-                    pt2 = mesh[toInd]
-                    dots = DotsFromSegment(pt1, pt2, checkFreq)
-                    if not pathKron.contains_points(dots).any():
-                        weight = distPointToPoint(pt1, pt2)
-                        G.add_edge(fromInd, toInd, weight=weight)
+                        toInd = nodeFromIndex(i - 1, j - 1, px)
+                        pt2 = mesh[toInd]
+                        dots = DotsFromSegment(pt1, pt2, checkFreq)
+                        if not pathKron.contains_points(dots).any():
+                            weight = distPointToPoint(pt1, pt2)
+                            G.add_edge(fromInd, toInd, weight=weight)
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
                             #else:
@@ -993,11 +993,11 @@ def makeHalfGraph(mask2d, mesh, checkFreq=40):
                 if i > 2 and j < px - 1:
                     if mask2d[i - 3][j + 1] == True:
                         toInd = nodeFromIndex(i - 3, j + 1, px)
-                            pt2 = mesh[toInd]
-                            dots = DotsFromSegment(pt1, pt2, checkFreq)
-                            if not pathKron.contains_points(dots).any():
-                                weight = distPointToPoint(pt1, pt2)
-                                G.add_edge(fromInd, toInd, weight=weight)
+                        pt2 = mesh[toInd]
+                        dots = DotsFromSegment(pt1, pt2, checkFreq)
+                        if not pathKron.contains_points(dots).any():
+                            weight = distPointToPoint(pt1, pt2)
+                            G.add_edge(fromInd, toInd, weight=weight)
     
                             #if toInd in dict:
                             #    dict[toInd].append(fromInd)
@@ -2721,13 +2721,13 @@ def ClosestPathWithTraceDijkstra(ptsFrom, ptsTo, velocities, G, mesh, mask):
     for i in range(np.shape(ptsFrom)[0]):
         dists = []
         ptFromInd = ptFromInds[i]
-            distsTmp, tracesTmp = nx.single_source_dijkstra(G, ptFromInd)
-            for j in range(np.shape(ptsTo)[0]):
-                ptToInd = ptToInds[j]
-                    dists.append(distsTmp[ptToInd])
+        distsTmp, tracesTmp = nx.single_source_dijkstra(G, ptFromInd)
+        for j in range(np.shape(ptsTo)[0]):
+            ptToInd = ptToInds[j]
+            dists.append(distsTmp[ptToInd])
             traces[ptFromInds[i]][ptToInds[j]] = tracesTmp[ptToInd]
-            dists = np.array(dists) + distsFrom[i] + distsTo
-            times = np.append(times, np.array([dists / velocities[i]]), axis=0)
+        dists = np.array(dists) + distsFrom[i] + distsTo
+        times = np.append(times, np.array([dists / velocities[i]]), axis=0)
     i_args = np.argmin(times, axis=0)
     
     ptsToTimes = []
@@ -2740,18 +2740,18 @@ def ClosestPathWithTraceDijkstra(ptsFrom, ptsTo, velocities, G, mesh, mask):
         optimalStationNumber = i_args[i]
         ptFrom = ptsFrom[optimalStationNumber]
         ptTo = ptsTo[i]
-            trace = traces[ptFromInds[optimalStationNumber]][ptToInds[i]]
-            x = [ptFrom[0]]
-            y = [-ptFrom[1] + height]
+        trace = traces[ptFromInds[optimalStationNumber]][ptToInds[i]]
+        x = [ptFrom[0]]
+        y = [-ptFrom[1] + height]
         for j in range(len(trace)-1):
-                ind = trace[j]
-                x.append(mesh[ind][0])
-                y.append(-mesh[ind][1] + height)
-            x.append(ptTo[0])
-            y.append(-ptTo[1] + height)
-            x = np.array(x)
-            y = np.array(y)
-            plotData.append([x, y, ptsToTimes[i], 0, optimalStationNumber])
+            ind = trace[j]
+            x.append(mesh[ind][0])
+            y.append(-mesh[ind][1] + height)
+        x.append(ptTo[0])
+        y.append(-ptTo[1] + height)
+        x = np.array(x)
+        y = np.array(y)
+        plotData.append([x, y, ptsToTimes[i], 0, optimalStationNumber])
     
     
     # x, y, time, skip, frompt
