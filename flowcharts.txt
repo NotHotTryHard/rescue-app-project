@@ -1,0 +1,71 @@
+graph TD
+    subgraph Survival_Probability_Calculation
+        A[Start] --> B["Input: rescue_times t, median_lifespan m, max_lifespan θ"]
+        B --> C["γ = ln(2) × θ × (θ−m) / m"]
+        C --> D{For each t}
+        D -- "t ≤ 0" --> F["P = 1.0"]
+        D -- "0 ＜ t ＜ θ" --> H["exp = −γ × t / (θ × (θ−t))"]
+        H --> I["P = e^exp"]
+        D -- "t ≥ θ" --> J["P = 0.0"]
+        F --> K[P for each t]
+        I --> K
+        J --> K
+        K --> L[T_max, P_max]
+        K --> M[T_avg, P_avg]
+        D --> L
+        D --> M
+        L --> O[End]
+        M --> O[End]
+    end
+
+graph TD
+    subgraph Detailed_Line_Method
+        A[Start] --> B["Input: Stations, Incidents, Velocities"]
+        B --> C["Filter incidents to be on water"]
+        C --> D["Set min_times for each incident to ∞"]
+        D --> E{"For each Station S
+        (speed v)"}
+        E --> F["Determine zone of S"]
+        F --> G{"For each Incident I"}
+        G --> H["Determine zone of I"]
+        H --> I["Select path by zone rules"]
+        I --> J{"Path type"}
+        J -- Direct --> K["dist = distance(S, I)"]
+        J -- Via_Gate --> L["dist = distance(S, Gate) + distance(Gate, I)"]
+        J -- Via_Bypass --> M["dist = distance(S, BP1) + … + distance(BPN, I)"]
+        K --> N["time = dist / v"]
+        L --> N
+        M --> N
+        N --> O{"Is time < min_times\\[I\\]?"}
+        O -- Yes --> P["Store new min_times\\[I\\]; remember S and path"]
+        O -- No  --> Q["Keep old min_time"]
+        P --> G
+        Q --> G
+        G -->|all incidents done| E
+        E -->|all stations done| R["Return min_times and path data"]
+        R --> S[End]
+    end
+
+
+graph TD
+    subgraph Detailed_Graph_Method
+        A[Start] --> B[Input: Stations, Incidents, Velocities, Graph G]
+        B --> C["For each Station S, find closest water node NS"]
+        C --> D["For each Incident I, find closest water node NI"]
+        D --> E[Initialize min_times for each incident to ∞]
+        E --> F{For each Station S with velocity v}
+        F --> G[Run Dijkstra from NS to all nodes]
+        G --> H{For each Incident I}
+        H --> I_node["Get Dijkstra distance d(NS, NI)"]
+        I_node --> J["1. Calculate total distance = distance(S, NS) + d(NS, NI) + distance(NI, I)"]
+        J --> K["2. Calculate time = total_distance / v"]
+        K --> L{Is time < min_times&#91;I&#93;?}
+        L -- Yes --> M["Update min_times[I] = time; record S as best station; store path"]
+        L -- No --> N[Continue]
+        M --> H
+        N --> H
+        H -- All incidents done --> F
+        F -- All stations done --> O[Return min_times and path data]
+        O --> P[End]
+    end
+
